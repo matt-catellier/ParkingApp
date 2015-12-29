@@ -1,0 +1,30 @@
+IF OBJECT_ID('AppUser')
+IS NOT NULL DROP TABLE AppUser;
+
+CREATE TABLE AppUser (
+	userID			INTEGER PRIMARY KEY IDENTITY(1000, 1),
+	userName		VARCHAR(50) NOT NULL,
+	passWord		VARCHAR(50) NOT NULL,
+	firstName		VARCHAR(50) NOT NULL,
+	lastName		VARCHAR(50) NOT NULL,
+	phoneNumber		VARCHAR(50) NOT NULL,
+	emailAddress	VARCHAR(100) NOT NULL,
+	birthDate		DATE NOT NULL,
+	paymentMethod	VARCHAR(50) NULL			 
+);
+
+IF OBJECT_ID('UserSpot')
+IS NOT NULL DROP TABLE UserSpot;
+
+CREATE TABLE SpotUser (
+	spotID			INTEGER PRIMARY KEY IDENTITY(1000, 1),
+	userID			
+						
+);
+
+IF OBJECT_ID('UserSpot')
+IS NOT NULL DROP TABLE UserSpot;
+
+CREATE TABLE CarUser (
+
+);

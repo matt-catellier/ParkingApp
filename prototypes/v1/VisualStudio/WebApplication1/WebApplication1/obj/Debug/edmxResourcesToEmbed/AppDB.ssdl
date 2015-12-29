@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AppUser">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="passWord" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emailAddress" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="birthDate" Type="date" Nullable="false" />
+    <Property Name="paymentMethod" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="spotID" />
+      <PropertyRef Name="dateAvailable" />
+      <PropertyRef Name="startTime" />
+      <PropertyRef Name="carID" />
+    </Key>
+    <Property Name="spotID" Type="int" Nullable="false" />
+    <Property Name="dateAvailable" Type="date" Nullable="false" />
+    <Property Name="startTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="endTime" Type="time" Precision="7" />
+    <Property Name="hourlyRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="paymentID" Type="int" />
+    <Property Name="carID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarUser">
+    <Key>
+      <PropertyRef Name="carID" />
+    </Key>
+    <Property Name="carID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userID" Type="int" />
+    <Property Name="plateNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="brand" Type="varchar" MaxLength="50" />
+    <Property Name="model" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="paymentID" />
+    </Key>
+    <Property Name="paymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="paymentMethod" Type="varchar" MaxLength="50" />
+    <Property Name="paid" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SpotAvailibility">
+    <Key>
+      <PropertyRef Name="spotID" />
+      <PropertyRef Name="dateAvailable" />
+      <PropertyRef Name="startTime" />
+    </Key>
+    <Property Name="spotID" Type="int" Nullable="false" />
+    <Property Name="dateAvailable" Type="date" Nullable="false" />
+    <Property Name="startTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="endTime" Type="time" Precision="7" />
+    <Property Name="hourlyRate" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="minBooking" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="SpotUser">
+    <Key>
+      <PropertyRef Name="spotID" />
+    </Key>
+    <Property Name="spotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userID" Type="int" />
+    <Property Name="spotType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="country" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="province" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="streetAddress" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="postalCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="details" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <Association Name="FK__Booking__7E02B4CC">
+    <End Role="SpotAvailibility" Type="Self.SpotAvailibility" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SpotAvailibility">
+        <PropertyRef Name="spotID" />
+        <PropertyRef Name="dateAvailable" />
+        <PropertyRef Name="startTime" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="spotID" />
+        <PropertyRef Name="dateAvailable" />
+        <PropertyRef Name="startTime" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__carID__7D0E9093">
+    <End Role="CarUser" Type="Self.CarUser" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarUser">
+        <PropertyRef Name="carID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="carID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__payment__7C1A6C5A">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="paymentID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="paymentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CarUser__model__74794A92">
+    <End Role="AppUser" Type="Self.AppUser" Multiplicity="0..1" />
+    <End Role="CarUser" Type="Self.CarUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppUser">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="CarUser">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SpotAvail__minBo__7755B73D">
+    <End Role="SpotUser" Type="Self.SpotUser" Multiplicity="1" />
+    <End Role="SpotAvailibility" Type="Self.SpotAvailibility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SpotUser">
+        <PropertyRef Name="spotID" />
+      </Principal>
+      <Dependent Role="SpotAvailibility">
+        <PropertyRef Name="spotID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SpotUser__userID__719CDDE7">
+    <End Role="AppUser" Type="Self.AppUser" Multiplicity="0..1" />
+    <End Role="SpotUser" Type="Self.SpotUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppUser">
+        <PropertyRef Name="userID" />
+      </Principal>
+      <Dependent Role="SpotUser">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="AppUser" EntityType="Self.AppUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarUser" EntityType="Self.CarUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpotAvailibility" EntityType="Self.SpotAvailibility" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpotUser" EntityType="Self.SpotUser" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Booking__7E02B4CC" Association="Self.FK__Booking__7E02B4CC">
+      <End Role="SpotAvailibility" EntitySet="SpotAvailibility" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__carID__7D0E9093" Association="Self.FK__Booking__carID__7D0E9093">
+      <End Role="CarUser" EntitySet="CarUser" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__payment__7C1A6C5A" Association="Self.FK__Booking__payment__7C1A6C5A">
+      <End Role="Payment" EntitySet="Payment" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CarUser__model__74794A92" Association="Self.FK__CarUser__model__74794A92">
+      <End Role="AppUser" EntitySet="AppUser" />
+      <End Role="CarUser" EntitySet="CarUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SpotAvail__minBo__7755B73D" Association="Self.FK__SpotAvail__minBo__7755B73D">
+      <End Role="SpotUser" EntitySet="SpotUser" />
+      <End Role="SpotAvailibility" EntitySet="SpotAvailibility" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SpotUser__userID__719CDDE7" Association="Self.FK__SpotUser__userID__719CDDE7">
+      <End Role="AppUser" EntitySet="AppUser" />
+      <End Role="SpotUser" EntitySet="SpotUser" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

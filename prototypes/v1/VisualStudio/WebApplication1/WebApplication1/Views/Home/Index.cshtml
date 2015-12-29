@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<h2>@Html.Raw(ViewBag.Title)</h2>
+
+@Html.ActionLink("Sign Up", "Create", "Account", new { }, null) |
+@Html.ActionLink("Log In", "LogIn", "Account", new { }, null)
+

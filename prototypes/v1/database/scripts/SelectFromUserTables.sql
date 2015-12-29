@@ -1,0 +1,3 @@
+SELECT * FROM AppUser;
+SELECT * FROM CarUser;
+SELECT * FROM SpotUser;

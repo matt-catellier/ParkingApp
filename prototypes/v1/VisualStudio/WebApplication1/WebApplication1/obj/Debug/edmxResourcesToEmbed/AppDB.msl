@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="AppDBEntities">
+    <EntitySetMapping Name="AppUsers">
+      <EntityTypeMapping TypeName="Model.AppUser">
+        <MappingFragment StoreEntitySet="AppUser">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="passWord" ColumnName="passWord" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+          <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+          <ScalarProperty Name="paymentMethod" ColumnName="paymentMethod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bookings">
+      <EntityTypeMapping TypeName="Model.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="spotID" ColumnName="spotID" />
+          <ScalarProperty Name="dateAvailable" ColumnName="dateAvailable" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="hourlyRate" ColumnName="hourlyRate" />
+          <ScalarProperty Name="paymentID" ColumnName="paymentID" />
+          <ScalarProperty Name="carID" ColumnName="carID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarUsers">
+      <EntityTypeMapping TypeName="Model.CarUser">
+        <MappingFragment StoreEntitySet="CarUser">
+          <ScalarProperty Name="carID" ColumnName="carID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="plateNumber" ColumnName="plateNumber" />
+          <ScalarProperty Name="brand" ColumnName="brand" />
+          <ScalarProperty Name="model" ColumnName="model" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="Model.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="paymentID" ColumnName="paymentID" />
+          <ScalarProperty Name="paymentMethod" ColumnName="paymentMethod" />
+          <ScalarProperty Name="paid" ColumnName="paid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpotAvailibilities">
+      <EntityTypeMapping TypeName="Model.SpotAvailibility">
+        <MappingFragment StoreEntitySet="SpotAvailibility">
+          <ScalarProperty Name="spotID" ColumnName="spotID" />
+          <ScalarProperty Name="dateAvailable" ColumnName="dateAvailable" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="hourlyRate" ColumnName="hourlyRate" />
+          <ScalarProperty Name="minBooking" ColumnName="minBooking" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpotUsers">
+      <EntityTypeMapping TypeName="Model.SpotUser">
+        <MappingFragment StoreEntitySet="SpotUser">
+          <ScalarProperty Name="spotID" ColumnName="spotID" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="spotType" ColumnName="spotType" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="province" ColumnName="province" />
+          <ScalarProperty Name="streetAddress" ColumnName="streetAddress" />
+          <ScalarProperty Name="postalCode" ColumnName="postalCode" />
+          <ScalarProperty Name="details" ColumnName="details" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
